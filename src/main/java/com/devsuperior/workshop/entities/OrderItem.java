@@ -7,6 +7,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
+
 import com.devsuperior.workshop.entities.pk.OrdemItemPK;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -79,12 +81,19 @@ public class OrderItem implements Serializable{
 	}
 
 
+	public Double getSubTotal() {
+		return this.getPrice() * this.getQuantity();
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
 
 
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
